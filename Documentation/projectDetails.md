@@ -9,11 +9,9 @@ Problem: Abnormally high CPU/RAM usage
 Proposed Solution: Python program that gets the current CPU usage, and flags programs that takes up high amounts of data, either terminating or alerting the user of the process
 
 Failures: 
-- Detects Windows services, and flags them
+- <s>Detects Windows services, and flags them</s>
 
 Reflection (Based on Flow Chart):
-- Was TFidVectorizer ever needed?
-    - No.
 - Does IsolationForest work with floats?
     - Yes, but it had to be turned into a 2-D array with numpy.
 - What is an "ArrayLike" data type?

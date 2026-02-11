@@ -27,7 +27,6 @@ def clear() -> None:
         os.system("clear")
 
 try:
-    from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.ensemble import IsolationForest
     import psutil
     import numpy
@@ -37,7 +36,6 @@ except Exception:
         clear()
 
     # Import after installed
-    from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.ensemble import IsolationForest
     import psutil
     import numpy
@@ -45,6 +43,28 @@ except Exception:
 # Global Variables
 processes = {}
 saveDirectoryPath = f"C:\\Users\\{os.getlogin()}\\Desktop"
+windowsPrograms = [
+    "System Idle Process",
+    "",
+    "Registry",
+    "LockApp.exe",
+    "dwm.exe",
+    "MsMpEng.exe",
+    "explorer.exe",
+    "TextInputHost.exe",
+    "SearchHost.exe",
+    "ShellHost.exe",
+    "StartMenuExperienceHost.exe",
+    "Widgets.exe",
+    "SystemSettings.exe",
+    "Microsoft.Management.Services.IntuneWindowsAgent.exe",
+    "powershell.exe",
+    "OfficeClickToRun.exe",
+    "PhoneExperienceHost.exe",
+    "msedgewebview2.exe",
+    "MemCompression"
+
+]
 
 # Function definitions
 def collectData() -> dict:
@@ -68,7 +88,7 @@ def collectData() -> dict:
 
 def searchForOutliers(data: dict, savePath: str) -> None:
     '''
-    Docstring for searchForOutliers
+    Searches for outliers based on memory usage, then reports back to the user
     
     :param data: The data to search for outliers. For this purpose, we will pass in a dictionary with
     the name of process and the total bytes used.
@@ -77,6 +97,7 @@ def searchForOutliers(data: dict, savePath: str) -> None:
     :type savePath: str
     '''
     # Setup
+    global windowsPrograms
     keys = []
     values = []
     for key in data: keys.append(key); values.append(data[key])
@@ -101,7 +122,7 @@ def searchForOutliers(data: dict, savePath: str) -> None:
     # TODO Change $data to the dict of outliers
     with open(f"{savePath}\\memOutlier.txt", "w") as outs:
         for outlier in recombinedData:
-            if recombinedData[outlier] == -1:
+            if (recombinedData[outlier] == -1) and (outlier not in windowsPrograms):
                 outs.write(f'{outlier}\n')
     
     
