@@ -133,7 +133,7 @@ def searchForOutliers(data: dict, savePath: str) -> None:
 if __name__ == "__main__":
     processes = collectData()
     for entry in processes:
-            print(f"{entry}: {processes[entry]}") 
+        print(f"{entry}: {processes[entry]}") 
     searchForOutliers(processes, saveDirectoryPath)
     clear()
     print("[END] Outliers have been found. Results stored on Desktop")
